@@ -1,4 +1,4 @@
-import { useTema } from './TemaContext';
+import { useTema } from './context/TemaContext';
 
 function AlternarTema() {
   const { tema, alterarTema } = useTema();

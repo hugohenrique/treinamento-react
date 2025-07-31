@@ -1,24 +1,29 @@
 import './App.css'
-/*
-import { TemaProvider } from './component/TemaContext';
-import Saudacao from './component/Saudacao';
-import AlternarTema from './component/AlternarTema';
-*/
 
-import { UsuarioProvider } from './component/context/UsuarioContext';
+import { UsuarioProvider, useUsuario } from './component/context/UsuarioContext';
+import { TemaProvider } from './component/context/TemaContext';
+import AlternarTema from './component/AlternarTema';
 import Login from './component/Login';
+
+const SaudacaoComTema = () => {
+  const { usuario } = useUsuario();
+  const nome = usuario ? usuario : 'visitante';
+  return (
+    <p>Bem vindo(a), {nome}</p>
+  );
+};
 
 function App() {
   return (
-    <>
+    <TemaProvider>
       <UsuarioProvider>
-        <Login />
+        <div>
+          <AlternarTema />
+          <Login />
+          <SaudacaoComTema />
+        </div>
       </UsuarioProvider>
-      {/* <TemaProvider>
-        <AlternarTema />
-        <Saudacao nome="João" />
-      </TemaProvider> */}
-    </>
+    </TemaProvider>
   )
 }
 
