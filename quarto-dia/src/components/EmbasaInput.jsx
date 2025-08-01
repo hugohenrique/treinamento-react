@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CampoEntrada = styled.input`
+const EmbasaInput = styled.input`
   padding: 10px;
   border: solid 1px #ccc;
   background: #fff;
@@ -9,4 +9,4 @@ const CampoEntrada = styled.input`
   border-radius: 6px;
 `;
 
-export default CampoEntrada;
+export default EmbasaInput;
