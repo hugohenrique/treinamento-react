@@ -1,0 +1,17 @@
+.carregando {
+    opacity: 0.2;
+}
+
+.erro {
+    background-color: red;
+    color: #fff;
+    padding: 10px;
+    border: solid 1px #000;
+}
+
+input, textarea {
+    font-size: 14px;
+    color: #555;
+    padding: 8px;
+    border: solid 1px #999;
+}
