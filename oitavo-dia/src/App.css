@@ -1,0 +1,29 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+button {
+  background-color: #eee;
+}
+
+.product-item {
+  padding: 20px;
+  border: solid 1px #ccc;
+  margin: 10px;
+}
+
+.carrinho-container {
+  padding: 10px; 
+  background-color: #ddd;
+  border: solid 1px #ccc;
+}
+
+.btn-remove-item {
+  padding: 4px;
+  font-size: 11px;
+  color: #fff;
+  background: red;
+  margin-left: 10px;
+}
