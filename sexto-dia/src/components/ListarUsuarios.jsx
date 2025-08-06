@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { getUsers } from '../userContext/api';
 import './style.css';
 
 const ListarUsuarios = () => {
@@ -13,21 +14,13 @@ const ListarUsuarios = () => {
     useEffect(() => {
         async function carregar() {
             try {
-                const resposta = await fetch('https://jsonplaceholder.typicode.com/users');
-                if (!resposta.ok) {
-                    setCarregando(false);
-                    throw new Error('Erro ao consultar os usuários');
-                }
-
-                setTimeout(async () => {
-                    const body = await resposta.json();
-                    setUsuarios(body);
-                    setCarregando(false);
-                }, 4000);
+                const users = await getUsers();
+                setUsuarios(users);
             } catch (e) {
                 setErro(e);
+                setCarregando(false);
             } finally {
-                // setCarregando(false);
+                setCarregando(false);
             }
         }
 
