@@ -4,22 +4,30 @@ import storage from 'redux-persist/lib/storage';
 import authSlice from '../features/authSlice';
 import counterSlice from '../features/counterSlice';
 import carrinhoSlice from '../features/carrinhoSlice';
+import { combineReducers } from 'redux';
+
+const rootReducer = combineReducers({
+    auth: authSlice,
+    carrinho: carrinhoSlice,
+    counter: counterSlice,
+});
 
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['carrinho', 'auth']
+    whitelist: ['auth', 'carrinho']
 };
 
-const carinhoSlicePersistido = persistReducer(persistConfig, carrinhoSlice);
-const authSlicePersistido = persistReducer(persistConfig, authSlice);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-    reducer: {
-        auth: authSlicePersistido,
-        carrinho: carinhoSlicePersistido,
-        counter: counterSlice,
-    }
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+            },
+        }),
 });
 
 export const persistor = persistStore(store);

@@ -21,8 +21,10 @@ export default function Login() {
         <div style={{ marginBottom: '20px' }}>
             {auth.user ? (
                 <>
-                    <p>Bem vindo, {auth.user}</p>
-                    <button onClick={() => dispatch(logout())}>sair</button>
+                    <p>
+                        Bem vindo, <strong>{auth.user}</strong>
+                        <button className="btn-logout" onClick={() => dispatch(logout())}>sair</button>
+                    </p>
                 </>
             ) : (
                 <>

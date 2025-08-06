@@ -8,7 +8,7 @@ export default function ProductItem({ product }) {
         <div className="product-item">
             <p><strong>{product.name}</strong></p>
             <p>R$ {product.price}</p>
-            <button onClick={() => dispatch(adicionar(product))}>adicionar no carrinho</button>
+            <button className="btn-adicionar-item" onClick={() => dispatch(adicionar(product))}>adicionar no carrinho</button>
         </div>
     );
 }

@@ -7,18 +7,18 @@ export default function Carrinho() {
     const dispatch = useDispatch();
     return (
         <div className="carrinho-container">
-            <h4>Carrinho</h4>
+            <h4 style={{ color: '#ccc' }}>Carrinho</h4>
             {itens.length === 0 ? <p>Seu carrinho está vazio</p> : (
                 <>
-                    <ul>
+                    <ul className="carrinho-itens">
                         {itens.map(item => (
-                            <li key={item.id}>
-                                {item.name} - {item.qtd} (QTD) - R$ {item.price} (R$ {item.price * item.qtd})
+                            <li className="carrinho-item" key={item.id}>
+                                <span className="product-name">{item.name}</span> - {item.qtd} (QTD) - R$ {item.price} (R$ {item.price * item.qtd})
                                 <button className="btn-remove-item" onClick={() => dispatch(retirarCarrinho(item.id))}>remover</button>
                             </li>
                         ))}
                     </ul>
-                    <button onClick={() => dispatch(limparCarrinho())}>limpar carrinho</button>
+                    <button className="btn-limpar-carrinho" onClick={() => dispatch(limparCarrinho())}>limpar carrinho</button>
                 </>
             )}
         </div>
