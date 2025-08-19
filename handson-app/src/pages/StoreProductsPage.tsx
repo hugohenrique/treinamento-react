@@ -21,7 +21,7 @@ export default function StoreProductsPage() {
           <div className="card-body space-y-2">
             <p>{formatMoney(product.price)}</p>
             <button
-              className="btn btn-primary w-full"
+              className={`btn w-full btn-primary ${product.stock === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
               onClick={() => dispatch(add(product.id))}
               disabled={product.stock === 0}>
               {product.stock === 0 ? 'Sem estoque' : 'Adicionar ao carrinho'}

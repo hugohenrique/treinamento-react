@@ -14,7 +14,7 @@ export default function StoreCartPage() {
   }, 0);
 
   return (
-    <div className='card'>
+    <div className="card">
       <div className='card-header flex justify-between items-center'>
         <h1 className='text-xl font-bold'>Carrinho</h1>
         <button className='btn' onClick={() => dispatch(clear())}>Limpar</button>
@@ -33,7 +33,7 @@ export default function StoreCartPage() {
         })}
         {!!items.length && <>
           <p className="mt-4">Total: {formatMoney(total)}</p>
-          <Link to="/store/checkout"></Link>
+          <Link className="btn btn-primary mt-4" to="/store/checkout">Finalizar compra</Link>
         </>}
       </div>
     </div>

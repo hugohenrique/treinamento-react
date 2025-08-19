@@ -1,12 +1,11 @@
-import { Outlet } from 'react-router-dom';
 import StoreCartPage from '../pages/StoreCartPage';
 import StoreProductsPage from '../pages/StoreProductsPage';
-
-const Layout = () => <div><Outlet/></div>;
+import StoreLayout from '../components/StoreLayout';
+import CheckoutPage from '../pages/CheckoutPage';
 
 export default {
   path: '/store',
-  element: <Layout/>,
+  element: <StoreLayout/>,
   children: [
     {
       index: true,
@@ -15,6 +14,10 @@ export default {
     {
       path: 'cart',
       element: <StoreCartPage/>
+    },
+    {
+      path: 'checkout',
+      element: <CheckoutPage/>
     }
   ]
 };

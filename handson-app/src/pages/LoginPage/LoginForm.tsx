@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import z from 'zod';
+import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
 
 const schema = z.object({
-  login: z.string().email('Email inválido'),
+  email: z.string().email('Email inválido'),
   password: z.string().min(6, 'Você informar pelo menos 6 caracteres')
 });
 
@@ -13,15 +15,22 @@ type LoginDataForm = z.infer<typeof schema>;
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const { login, isLoading, isAuthenticated, error, clearError } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/store/cart');
+    }
+  }, [isAuthenticated]);
 
   const { register, handleSubmit, formState: { errors } } = useForm<LoginDataForm>({
     resolver: zodResolver(schema)
   });
 
-  const onSubmit = (payload: LoginDataForm) => {
-    // clearError
-    // await login(payload.login, payload.password);
-    console.log(payload);
+  const onSubmit = async (payload: LoginDataForm) => {
+    clearError();
+    await login(payload.email, payload.password);
   };
 
   return (
@@ -32,22 +41,22 @@ export default function LoginForm() {
         </div>
         <div className="card-body">
           <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-            {/* {error && (
+            {error && (
               <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
                 {error}
               </div>
-            )} */}
+            )}
             <div>
               <label className="label">
                 <input
                   className="input"
                   type="email"
                   placeholder="seu@email.com"
-                  {...register('login')}
+                  {...register('email')}
                 />
               </label>
-              {errors.login && (
-                <p className="text-sm text-red-600 mt-1">{errors.login.message}</p>
+              {errors.email && (
+                <p className="text-sm text-red-600 mt-1">{errors.email.message}</p>
               )}
             </div>
             <div>
@@ -71,8 +80,17 @@ export default function LoginForm() {
                 <p className="text-sm text-red-600 mt-1">{errors.password.message}</p>
               )}
             </div>
-            <button className="btn btn-primary w-full" type="submit">
-              Entrar
+            <button
+              className="btn btn-primary w-full"
+              type="submit"
+              disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  </>
+                ) : (
+                  'Entrar'
+                )}
             </button>
           </form>
         </div>

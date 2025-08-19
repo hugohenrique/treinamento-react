@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import store from './routes/store';
 import LoginPage from './pages/LoginPage/Page';
-// import board from './routes/board';
+import board from './routes/board';
 
 const NotFound = () => (<div>Página não encontrada</div>);
 
@@ -17,7 +17,7 @@ const routerConfig = [
 ];
 
 routerConfig.push(store);
-// routerConfig.push(board);
+routerConfig.push(board);
 
 export const router = createBrowserRouter(routerConfig);
 
